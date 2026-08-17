@@ -10,11 +10,11 @@
   "completedEpochMs": null,
   "totalElapsedMs": null,
   "estimatedActiveMs": null,
-  "externalWaitMs": 0,
-  "ciWaitMs": 0,
-  "vercelWaitMs": 0,
-  "reworkMs": 480000,
-  "currentPhase": "Pull request and CI",
+  "externalWaitMs": 130000,
+  "ciWaitMs": 97000,
+  "vercelWaitMs": 71000,
+  "reworkMs": 780000,
+  "currentPhase": "Preview",
   "finalVerdict": null,
   "milestones": [
     {
@@ -65,6 +65,20 @@
       "atUtc": "2026-08-17T17:13:57.121486Z",
       "atLocal": "2026-08-17T19:13:57.121486+02:00",
       "elapsedMs": 1855109
+    },
+    {
+      "id": "pr-open",
+      "label": "Implementation PR opened",
+      "atUtc": "2026-08-17T17:18:17.000000Z",
+      "atLocal": "2026-08-17T19:18:17.000000+02:00",
+      "elapsedMs": 2114988
+    },
+    {
+      "id": "first-preview-ready",
+      "label": "First Git-connected deployment READY",
+      "atUtc": "2026-08-17T17:18:48.000000Z",
+      "atLocal": "2026-08-17T19:18:48.000000+02:00",
+      "elapsedMs": 2145988
     }
   ],
   "phases": [
@@ -107,19 +121,19 @@
     {
       "id": "P4",
       "name": "Pull request and CI",
-      "startUtc": null,
+      "startUtc": "2026-08-17T17:13:57.121486Z",
       "endUtc": null,
       "durationMs": null,
-      "status": "Pending",
+      "status": "Running",
       "dominantCategory": "CI"
     },
     {
       "id": "P5",
       "name": "Preview",
-      "startUtc": null,
+      "startUtc": "2026-08-17T17:18:19.000000Z",
       "endUtc": null,
       "durationMs": null,
-      "status": "Pending",
+      "status": "Running",
       "dominantCategory": "Vercel"
     },
     {
@@ -313,6 +327,61 @@
       "event": "Local pnpm release:check green",
       "result": "Passed",
       "related": "format lint typecheck build unit gateway contract browser notices architecture"
+    },
+    {
+      "id": "EVT-015",
+      "atUtc": "2026-08-17T17:18:17.000000Z",
+      "atLocal": "2026-08-17T19:18:17.000000+02:00",
+      "elapsedMs": 2114988,
+      "phase": "P4",
+      "category": "GitHub",
+      "event": "Opened implementation PR #1 targeting forward",
+      "result": "Passed",
+      "related": "https://github.com/different-ai/openwork-mcp-app-gallery-grok/pull/1"
+    },
+    {
+      "id": "EVT-016",
+      "atUtc": "2026-08-17T17:19:54.000000Z",
+      "atLocal": "2026-08-17T19:19:54.000000+02:00",
+      "elapsedMs": 2211988,
+      "phase": "P4",
+      "category": "CI",
+      "event": "Exact-head CI, CodeQL, dependency review, and public-readiness green for 2602b08",
+      "result": "Passed",
+      "related": "sha=2602b08e2d21b013036cbd28ba831cd69940ae1c"
+    },
+    {
+      "id": "EVT-017",
+      "atUtc": "2026-08-17T17:20:20.000000Z",
+      "atLocal": "2026-08-17T19:20:20.000000+02:00",
+      "elapsedMs": 2237988,
+      "phase": "P5",
+      "category": "Vercel",
+      "event": "First Git deployment READY but GET / returned 404 while /index.html was 200",
+      "result": "Failed",
+      "related": "ISS-004 REG-001"
+    },
+    {
+      "id": "EVT-018",
+      "atUtc": "2026-08-17T17:22:19.000000Z",
+      "atLocal": "2026-08-17T19:22:19.000000+02:00",
+      "elapsedMs": 2356988,
+      "phase": "P5",
+      "category": "Vercel",
+      "event": "Rewrite-only Preview still 404 at / because the Hono Function owns slash routes",
+      "result": "Failed",
+      "related": "dpl_AfFirHK59znEWa7Drfo2nnLYuLdC"
+    },
+    {
+      "id": "EVT-019",
+      "atUtc": "2026-08-17T17:25:29.147429Z",
+      "atLocal": "2026-08-17T19:25:29.147429+02:00",
+      "elapsedMs": 2547135,
+      "phase": "P5",
+      "category": "Implementation",
+      "event": "Function now serves GET / from bundled generated/gallery.html",
+      "result": "Passed",
+      "related": "local gateway and browser tests green"
     }
   ],
   "issues": [
@@ -354,8 +423,31 @@
       "expected": "Notice verifier hashes copied upstream files",
       "observed": "digest mismatch for grid-cell.png",
       "status": "Corrected"
+    },
+    {
+      "id": "ISS-004",
+      "firstObservedUtc": "2026-08-17T17:20:20.000000Z",
+      "firstObservedElapsedMs": 2237988,
+      "resolvedUtc": null,
+      "resolvedElapsedMs": null,
+      "phase": "P5",
+      "classification": "Vercel",
+      "origin": "self-introduced",
+      "expected": "GET / serves the gallery landing page",
+      "observed": "GET / returned 404 while /index.html returned 200",
+      "status": "Repairing"
     }
   ],
-  "regressions": [],
+  "regressions": [
+    {
+      "id": "REG-001",
+      "issueId": "ISS-004",
+      "introduced": "2602b08e2d21b013036cbd28ba831cd69940ae1c",
+      "detectedUtc": "2026-08-17T17:20:20.000000Z",
+      "correctedUtc": null,
+      "symptom": "gallery / 404 on Vercel while Function routes worked",
+      "status": "Repairing"
+    }
+  ],
   "deployments": []
 }

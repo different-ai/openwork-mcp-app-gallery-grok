@@ -84,6 +84,11 @@
 | 2026-08-17T17:08:00.000000Z | 2026-08-17T19:08:00.000000+02:00 | 24m 58s | P2    | Implementation | Built six deterministic single-file MCP App HTML resources                                                        | Passed  | Vite 6.4.3 + vite-plugin-singlefile                                               |
 | 2026-08-17T17:11:33.000000Z | 2026-08-17T19:11:33.000000+02:00 | 28m 31s | P3    | Test           | Playwright gallery, 320px, keyboard copy, and get-time UI-to-tool proof                                           | Passed  | 2 browser tests                                                                   |
 | 2026-08-17T17:13:57.121486Z | 2026-08-17T19:13:57.121486+02:00 | 30m 55s | P3    | Test           | Local pnpm release:check green                                                                                    | Passed  | format lint typecheck build unit gateway contract browser notices architecture    |
+| 2026-08-17T17:18:17.000000Z | 2026-08-17T19:18:17.000000+02:00 | 35m 15s | P4    | GitHub         | Opened implementation PR #1 targeting forward                                                                     | Passed  | https://github.com/different-ai/openwork-mcp-app-gallery-grok/pull/1              |
+| 2026-08-17T17:19:54.000000Z | 2026-08-17T19:19:54.000000+02:00 | 36m 52s | P4    | CI             | Exact-head CI, CodeQL, dependency review, and public-readiness green for 2602b08                                  | Passed  | sha=2602b08e2d21b013036cbd28ba831cd69940ae1c                                      |
+| 2026-08-17T17:20:20.000000Z | 2026-08-17T19:20:20.000000+02:00 | 37m 18s | P5    | Vercel         | First Git deployment READY but GET / returned 404 while /index.html was 200                                       | Failed  | ISS-004 REG-001 dpl_B5QX5qt82QTVJV7m3HHf3Rz5SJ8p                                  |
+| 2026-08-17T17:22:19.000000Z | 2026-08-17T19:22:19.000000+02:00 | 39m 17s | P5    | Vercel         | Rewrite-only Preview still 404 at / because the Hono Function owns slash routes                                   | Failed  | dpl_AfFirHK59znEWa7Drfo2nnLYuLdC                                                  |
+| 2026-08-17T17:25:29.147429Z | 2026-08-17T19:25:29.147429+02:00 | 42m 27s | P5    | Implementation | Function now serves GET / from bundled generated/gallery.html; local gateway and browser tests green              | Passed  | hashed CDN assets unchanged                                                       |
 
 ## 6. Issues Encountered
 
@@ -161,9 +166,9 @@
 - observed: GET `/` returned 404 while `/index.html` returned 200
 - symptom: landing page missing on the first Git-connected deployment of `2602b08`
 - root cause: the Hono Function owns `/`, so Vercel does not apply a directory index to `public/index.html`
-- attempts: confirmed `/healthz` and MCP endpoints work; confirmed hashed assets and `/index.html` are on the CDN
-- final correction: rewrite `/` to `/index.html` in `vercel.json`
-- affected files: vercel.json, scripts/check-vercel-architecture.mjs
+- attempts: (1) rewrite `/` to `/index.html` in vercel.json; Preview still returned 404 because the Hono Function owns slash routes before CDN directory index. (2) Serve GET `/` from Hono using bundled `generated/gallery.html`, matching the Snacks Function-owned `/` pattern, while hashed assets stay on the CDN.
+- final correction: Function serves the same generated gallery HTML at `/`; includeFiles glob includes `generated/gallery.html`
+- affected files: src/application.ts, src/gallery-page.ts, scripts/build-gallery.mjs, vercel.json, scripts/check-vercel-architecture.mjs, tests/gateway/routing.test.ts
 - affected commits: pending
 - invalidated proof: Preview `/` proof, then re-run after the rewrite deploy
 - closing verification: pending exact-head Preview of the rewrite commit

@@ -124,6 +124,17 @@ describe("gateway", () => {
     expect(healthy.status).toBeLessThan(500);
   });
 
+  it("serves the landing page at /", async () => {
+    const { app } = testApp({
+      galleryHtml:
+        "<!doctype html><title>MCP Apps example gallery</title><h1>MCP Apps example gallery</h1>",
+    });
+    const response = await app.request("/");
+    expect(response.status).toBe(200);
+    expect(response.headers.get("cache-control")).toBe("private, no-store");
+    expect(await response.text()).toContain("MCP Apps example gallery");
+  });
+
   it("serves health, readiness, version, and apps.json", async () => {
     const { app } = testApp();
     expect((await app.request("/healthz")).status).toBe(200);

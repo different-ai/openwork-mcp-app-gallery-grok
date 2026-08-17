@@ -5,7 +5,7 @@
   "buildCommand": "pnpm run build:vercel",
   "functions": {
     "app.ts": {
-      "includeFiles": "generated/mcp-app-resources.json",
+      "includeFiles": "generated/{mcp-app-resources.json,gallery.html}",
       "maxDuration": 30,
       "supportsCancellation": true
     }
@@ -62,6 +62,15 @@
     },
     {
       "source": "/apps/(.*)/mcp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
+    },
+    {
+      "source": "/",
       "headers": [
         {
           "key": "Cache-Control",

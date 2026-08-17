@@ -44,18 +44,21 @@ assert(
   manifest.framework === "hono" &&
     manifest.fluid === true &&
     manifest.buildCommand === "pnpm run build:vercel" &&
-    manifest.functions?.["app.ts"]?.includeFiles ===
-      "generated/mcp-app-resources.json" &&
+    String(manifest.functions?.["app.ts"]?.includeFiles).includes(
+      "mcp-app-resources.json",
+    ) &&
+    String(manifest.functions?.["app.ts"]?.includeFiles).includes(
+      "gallery.html",
+    ) &&
     manifest.functions?.["app.ts"]?.maxDuration === 30 &&
     manifest.functions?.["app.ts"]?.supportsCancellation === true &&
     JSON.stringify(manifest.regions) === JSON.stringify(["iad1"]),
   "vercel.json must declare Fluid, includeFiles, maxDuration 30, cancellation, and iad1",
 );
 assert(
-  (manifest.rewrites ?? []).some(
-    (entry) => entry.source === "/" && entry.destination === "/index.html",
-  ),
-  "vercel.json must rewrite / to /index.html so the gallery is not swallowed by the Function",
+  application.includes('app.get("/",') &&
+    application.includes("loadGalleryHtml"),
+  "Hono must serve GET / from the bundled gallery HTML because the Function owns slash routes",
 );
 
 const globalHeaders = headerMap(
@@ -87,6 +90,7 @@ for (const directive of [
 assert(globalHeaders.has("permissions-policy"), "Permissions-Policy required");
 
 for (const source of [
+  "/",
   "/apps/(.*)/mcp",
   "/healthz",
   "/readyz",

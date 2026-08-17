@@ -7,6 +7,7 @@ import {
   UPSTREAM_COMMIT,
 } from "./constants.js";
 import { mountGateway } from "./gateway.js";
+import { loadGalleryHtml } from "./gallery-page.js";
 import { createRegistry, parseDisabledSlugs } from "./registry.js";
 import { loadResourceBundle, type ResourceBundle } from "./resources.js";
 import { applySecurityHeaders } from "./security-headers.js";
@@ -15,6 +16,7 @@ import { mcpUrl, resolvePublicOrigin } from "./urls.js";
 export type ApplicationOptions = {
   env?: NodeJS.ProcessEnv;
   resourceBundle?: ResourceBundle;
+  galleryHtml?: string;
   disabledSlugs?: Iterable<string>;
   throwingSlugs?: Iterable<string>;
   hangingSlugs?: Iterable<string>;
@@ -66,6 +68,28 @@ export function createGalleryApplication(
     !bundleError &&
     registryValid &&
     Boolean(envProvenance(env).sha);
+
+  let galleryHtml: string | undefined = options.galleryHtml;
+  let galleryError: string | undefined;
+  if (galleryHtml === undefined) {
+    try {
+      galleryHtml = loadGalleryHtml();
+    } catch (error) {
+      galleryError =
+        error instanceof Error ? error.message : "gallery html failed";
+    }
+  }
+
+  app.get("/", (context) => {
+    if (!galleryHtml) {
+      return context.text(galleryError ?? "gallery html missing", 503, {
+        "cache-control": "private, no-store",
+      });
+    }
+    return context.html(galleryHtml, 200, {
+      "cache-control": "private, no-store",
+    });
+  });
 
   app.get("/healthz", (context) =>
     context.json({ ok: true }, 200, { "cache-control": "private, no-store" }),

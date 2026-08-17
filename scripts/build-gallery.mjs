@@ -162,6 +162,7 @@ const html = `<!DOCTYPE html>
 
 await writeFile(join(publicDir, "index.html"), html);
 await mkdir(join(root, "generated"), { recursive: true });
+await writeFile(join(root, "generated", "gallery.html"), html);
 await writeFile(
   join(root, "generated", "apps.json"),
   JSON.stringify(
