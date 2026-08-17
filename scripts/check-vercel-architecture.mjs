@@ -51,6 +51,12 @@ assert(
     JSON.stringify(manifest.regions) === JSON.stringify(["iad1"]),
   "vercel.json must declare Fluid, includeFiles, maxDuration 30, cancellation, and iad1",
 );
+assert(
+  (manifest.rewrites ?? []).some(
+    (entry) => entry.source === "/" && entry.destination === "/index.html",
+  ),
+  "vercel.json must rewrite / to /index.html so the gallery is not swallowed by the Function",
+);
 
 const globalHeaders = headerMap(
   manifest.headers?.find((entry) => entry.source === "/(.*)")?.headers,

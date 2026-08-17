@@ -101,7 +101,7 @@
 - attempts: esbuild minify with console/debugger drop (saved a few KiB, still over)
 - final correction: App HTML resource ceiling set to 1 MiB; tool result ceiling remains 512 KiB
 - affected files: src/limits.ts, scripts/bundle-mcp-app-resources.mjs, tests/helpers/bundle.ts, README.md
-- affected commits: pending implementation commit
+- affected commits: 2602b08e2d21b013036cbd28ba831cd69940ae1c
 - invalidated proof: none yet published
 - closing verification: production Vite build of all six resources under 1 MiB; unit oversized-resource test still fails a 1100 KiB fixture
 - time-to-detect: observed at first successful resource bundle
@@ -122,7 +122,7 @@
 - attempts: added per-request _meta envelope first; still 400 until headers were added
 - final correction: test helper sends Mcp-Method/Mcp-Name for 2026; CORS allow-headers updated
 - affected files: tests/helpers/app.ts, src/gateway.ts, tests/contract/apps.test.ts, tests/contract/protocol.test.ts
-- affected commits: pending implementation commit
+- affected commits: 2602b08e2d21b013036cbd28ba831cd69940ae1c
 - invalidated proof: local 2026 contract suite, then re-run green
 - closing verification: 33 vitest tests passed including 2026 and 2025 matrices
 - time-to-detect: during first contract run after envelope work
@@ -143,20 +143,56 @@
 - attempts: compared manifest hashes as binary buffers; 0 mismatches
 - final correction: hash file bytes, not UTF-8 text
 - affected files: scripts/verify-notices.mjs
-- affected commits: pending implementation commit
+- affected commits: 2602b08e2d21b013036cbd28ba831cd69940ae1c
 - invalidated proof: notices verification, then re-run green
 - closing verification: verified 78 upstream notices
 - time-to-detect: first notices run after implementation
 - time-to-repair: about 15s
 - final status: Corrected
 
+### ISS-004
+
+- first observed: 2026-08-17T17:20:20Z (elapsed 37m 18s)
+- resolved: pending this commit
+- phase: P5
+- classification: Vercel
+- origin: self-introduced
+- expected: GET `/` serves the gallery landing page
+- observed: GET `/` returned 404 while `/index.html` returned 200
+- symptom: landing page missing on the first Git-connected deployment of `2602b08`
+- root cause: the Hono Function owns `/`, so Vercel does not apply a directory index to `public/index.html`
+- attempts: confirmed `/healthz` and MCP endpoints work; confirmed hashed assets and `/index.html` are on the CDN
+- final correction: rewrite `/` to `/index.html` in `vercel.json`
+- affected files: vercel.json, scripts/check-vercel-architecture.mjs
+- affected commits: pending
+- invalidated proof: Preview `/` proof, then re-run after the rewrite deploy
+- closing verification: pending exact-head Preview of the rewrite commit
+- time-to-detect: about 2m after first READY deployment
+- time-to-repair: in progress
+- final status: Repairing
+
 ## 7. Regressions Introduced and Corrected
 
-None yet. ISS-002 and ISS-003 were test/harness defects, not shipped protocol behavior.
+### REG-001
+
+- linked issue: ISS-004
+- introduced: 2602b08e2d21b013036cbd28ba831cd69940ae1c
+- detected: 2026-08-17T17:20:20Z
+- corrected: pending
+- symptom: gallery `/` 404 on Vercel while Function routes worked
+- user impact: Copy MCP URL page was unreachable at the origin path
+- proof invalidated: Preview landing-page check
+- closing verification: pending
+- time-to-detect: about 2m after first READY deployment
+- time-to-repair: in progress
+
+ISS-002 and ISS-003 were test/harness defects, not shipped protocol behavior.
 
 ## 8. External Waits
 
-None yet.
+- GitHub GraphQL/REST 503 while opening the PR, 2026-08-17T17:16:00Z to 2026-08-17T17:18:10Z, classification GitHub, about 2m 10s
+- CI wait for PR head 2602b08, 2026-08-17T17:18:17Z to 2026-08-17T17:19:54Z, classification CI, about 1m 37s
+- First Vercel Git deployment, 2026-08-17T17:18:19Z to 2026-08-17T17:18:48Z, classification Vercel, 29s
 
 ## 9. Rework and Abandoned Approaches
 
