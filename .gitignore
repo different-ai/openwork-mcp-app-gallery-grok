@@ -17,3 +17,5 @@ blob-report/
 sbom.json
 .idea/
 .vscode/
+generated/html/
+generated/sbom.json
