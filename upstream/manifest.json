@@ -377,9 +377,9 @@
       "commit": "10195ad91851502134930e9b80ec2c04e277a720",
       "originalPath": "examples/customer-segmentation-server/src/data-generator.ts",
       "localPath": "upstream/ext-apps/customer-segmentation-server/src/data-generator.ts",
-      "sha256": "210e46a6e5e08e6e661f9b88fa30f5afb3de82f080cb10651131a61d0997ccc1",
+      "sha256": "afd5a3ec9cc88f03b455606e68ae47fe3cbd64d47dd36d8282749228b68f781c",
       "license": "MIT",
-      "modifications": "Copied unchanged except standalone HTTP/stdio listeners (main.ts) were omitted. Runtime registration uses a gallery-owned SDK v2 adapter; HTML is served from the immutable generated resource bundle rather than dist/mcp-app.html."
+      "modifications": "Copied from upstream. Gallery modification: synthetic sampling uses crypto.getRandomValues instead of Math.random, and the detail-panel CSS class uses toLowerCase without a no-op hyphen replace."
     },
     {
       "repository": "modelcontextprotocol/ext-apps",
@@ -404,9 +404,9 @@
       "commit": "10195ad91851502134930e9b80ec2c04e277a720",
       "originalPath": "examples/customer-segmentation-server/src/mcp-app.ts",
       "localPath": "upstream/ext-apps/customer-segmentation-server/src/mcp-app.ts",
-      "sha256": "6c36091172d3f9438e5cbe1251cbe212564b31a4e3eb36237ff3558d391e1559",
+      "sha256": "be6ce1f764fa5d9cd9adfe64823db3e2f4cef1047c915d1f9a7f48a1f1ff0bcd",
       "license": "MIT",
-      "modifications": "Copied unchanged except standalone HTTP/stdio listeners (main.ts) were omitted. Runtime registration uses a gallery-owned SDK v2 adapter; HTML is served from the immutable generated resource bundle rather than dist/mcp-app.html."
+      "modifications": "Copied from upstream. Gallery modification: synthetic sampling uses crypto.getRandomValues instead of Math.random, and the detail-panel CSS class uses toLowerCase without a no-op hyphen replace."
     },
     {
       "repository": "modelcontextprotocol/ext-apps",

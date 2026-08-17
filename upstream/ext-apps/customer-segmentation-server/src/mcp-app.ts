@@ -350,7 +350,7 @@ function renderLegend(): void {
 
 // Update detail panel with customer info
 function updateDetailPanel(customer: Customer): void {
-  const segmentClass = customer.segment.toLowerCase().replace("-", "-");
+  const segmentClass = customer.segment.toLowerCase();
   detailPanel.innerHTML = `
     <span class="detail-name">${customer.name}</span>
     <span class="detail-segment ${segmentClass}">${customer.segment}</span>

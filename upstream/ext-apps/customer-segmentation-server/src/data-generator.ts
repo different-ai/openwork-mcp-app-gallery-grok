@@ -1,6 +1,12 @@
 import type { Customer, SegmentSummary, SegmentName } from "./types.js";
 import { SEGMENT_COLORS, SEGMENTS } from "./types.js";
 
+function syntheticUnit(): number {
+  const bytes = new Uint32Array(1);
+  crypto.getRandomValues(bytes);
+  return (bytes[0] ?? 0) / 4294967296;
+}
+
 // Company name generation
 const PREFIXES = [
   "Apex",
@@ -113,8 +119,8 @@ const SEGMENT_WEIGHTS: Record<SegmentName, number> = {
 
 // Box-Muller transform for Gaussian random numbers
 function gaussianRandom(mean: number, stdDev: number): number {
-  const u1 = Math.random();
-  const u2 = Math.random();
+  const u1 = syntheticUnit();
+  const u2 = syntheticUnit();
   const z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
   return z0 * stdDev + mean;
 }
@@ -131,9 +137,9 @@ function generateClusteredValue(min: number, max: number): number {
 function generateCompanyName(usedNames: Set<string>): string {
   let attempts = 0;
   while (attempts < 100) {
-    const prefix = PREFIXES[Math.floor(Math.random() * PREFIXES.length)];
-    const core = CORES[Math.floor(Math.random() * CORES.length)];
-    const suffix = SUFFIXES[Math.floor(Math.random() * SUFFIXES.length)];
+    const prefix = PREFIXES[Math.floor(syntheticUnit() * PREFIXES.length)];
+    const core = CORES[Math.floor(syntheticUnit() * CORES.length)];
+    const suffix = SUFFIXES[Math.floor(syntheticUnit() * SUFFIXES.length)];
     const name = `${prefix} ${core} ${suffix}`;
     if (!usedNames.has(name)) {
       usedNames.add(name);
@@ -142,15 +148,15 @@ function generateCompanyName(usedNames: Set<string>): string {
     attempts++;
   }
   // Fallback: add a number
-  const prefix = PREFIXES[Math.floor(Math.random() * PREFIXES.length)];
-  const core = CORES[Math.floor(Math.random() * CORES.length)];
-  const num = Math.floor(Math.random() * 1000);
+  const prefix = PREFIXES[Math.floor(syntheticUnit() * PREFIXES.length)];
+  const core = CORES[Math.floor(syntheticUnit() * CORES.length)];
+  const num = Math.floor(syntheticUnit() * 1000);
   return `${prefix} ${core} ${num}`;
 }
 
 // Select segment based on weights
 function selectSegment(): SegmentName {
-  const rand = Math.random();
+  const rand = syntheticUnit();
   let cumulative = 0;
   for (const segment of SEGMENTS) {
     cumulative += SEGMENT_WEIGHTS[segment];
