@@ -16,22 +16,21 @@ user data. There is **no SLA**.
 
 ## Browse the six examples
 
-| Example               | Outcome                                                                   | Category      | MCP endpoint                      |
-| --------------------- | ------------------------------------------------------------------------- | ------------- | --------------------------------- |
-| Get Time              | Smallest tool plus interactive UI round trip for the current server time. | starter       | `/apps/get-time/mcp`              |
-| Budget Allocator      | Adjust a synthetic seed-stage budget with charts and recalculation.       | form          | `/apps/budget-allocator/mcp`      |
-| Cohort Heatmap        | Explore a dense interactive customer-retention heatmap.                   | visualization | `/apps/cohort-heatmap/mcp`        |
-| Customer Segmentation | Filter synthetic customers by revenue and engagement.                     | chart         | `/apps/customer-segmentation/mcp` |
-| Scenario Modeler      | Compare synthetic SaaS growth plans over stateless tools.                 | form          | `/apps/scenario-modeler/mcp`      |
-| Transcript            | Navigate a structured transcript in an interactive view.                  | media         | `/apps/transcript/mcp`            |
+Production origin (verified): `https://openwork-mcp-app-gallery-grok.vercel.app`
+
+| Example               | Outcome                                                                   | Category      | MCP endpoint                      | Production URL                                                                    |
+| --------------------- | ------------------------------------------------------------------------- | ------------- | --------------------------------- | --------------------------------------------------------------------------------- |
+| Get Time              | Smallest tool plus interactive UI round trip for the current server time. | starter       | `/apps/get-time/mcp`              | `https://openwork-mcp-app-gallery-grok.vercel.app/apps/get-time/mcp`              |
+| Budget Allocator      | Adjust a synthetic seed-stage budget with charts and recalculation.       | form          | `/apps/budget-allocator/mcp`      | `https://openwork-mcp-app-gallery-grok.vercel.app/apps/budget-allocator/mcp`      |
+| Cohort Heatmap        | Explore a dense interactive customer-retention heatmap.                   | visualization | `/apps/cohort-heatmap/mcp`        | `https://openwork-mcp-app-gallery-grok.vercel.app/apps/cohort-heatmap/mcp`        |
+| Customer Segmentation | Filter synthetic customers by revenue and engagement.                     | chart         | `/apps/customer-segmentation/mcp` | `https://openwork-mcp-app-gallery-grok.vercel.app/apps/customer-segmentation/mcp` |
+| Scenario Modeler      | Compare synthetic SaaS growth plans over stateless tools.                 | form          | `/apps/scenario-modeler/mcp`      | `https://openwork-mcp-app-gallery-grok.vercel.app/apps/scenario-modeler/mcp`      |
+| Transcript            | Navigate a structured transcript in an interactive view.                  | media         | `/apps/transcript/mcp`            | `https://openwork-mcp-app-gallery-grok.vercel.app/apps/transcript/mcp`            |
 
 The landing page is generated from the same catalog used for routing. Each card
 includes the audited upstream source, pinned revision, screenshot, safety note,
 suggested prompt, Copy MCP URL control, compatibility state, last verified
 build, and the restrained `grok` implementation label.
-
-Production origin URLs are added to this README only after stable production
-verification.
 
 ## Add an endpoint to a host
 
