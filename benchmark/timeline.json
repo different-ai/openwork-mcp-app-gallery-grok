@@ -13,8 +13,8 @@
   "externalWaitMs": 0,
   "ciWaitMs": 0,
   "vercelWaitMs": 0,
-  "reworkMs": 0,
-  "currentPhase": "Bootstrap",
+  "reworkMs": 480000,
+  "currentPhase": "Pull request and CI",
   "finalVerdict": null,
   "milestones": [
     {
@@ -37,6 +37,34 @@
       "atUtc": "2026-08-17T16:49:14.153613Z",
       "atLocal": "2026-08-17T18:49:14.153613+02:00",
       "elapsedMs": 372141
+    },
+    {
+      "id": "governance-forward",
+      "label": "Governance commit on forward",
+      "atUtc": "2026-08-17T16:49:32.000000Z",
+      "atLocal": "2026-08-17T18:49:32.000000+02:00",
+      "elapsedMs": 389988
+    },
+    {
+      "id": "six-app-catalog",
+      "label": "Six-app local contract suite green",
+      "atUtc": "2026-08-17T17:07:11.000000Z",
+      "atLocal": "2026-08-17T19:07:11.000000+02:00",
+      "elapsedMs": 1448988
+    },
+    {
+      "id": "browser-proof",
+      "label": "Browser and UI-to-tool proof",
+      "atUtc": "2026-08-17T17:11:33.000000Z",
+      "atLocal": "2026-08-17T19:11:33.000000+02:00",
+      "elapsedMs": 1710988
+    },
+    {
+      "id": "local-release-check",
+      "label": "First green local release:check",
+      "atUtc": "2026-08-17T17:13:57.121486Z",
+      "atLocal": "2026-08-17T19:13:57.121486+02:00",
+      "elapsedMs": 1855109
     }
   ],
   "phases": [
@@ -53,27 +81,27 @@
       "id": "P1",
       "name": "Bootstrap",
       "startUtc": "2026-08-17T16:49:14.153613Z",
-      "endUtc": null,
-      "durationMs": null,
-      "status": "Running",
+      "endUtc": "2026-08-17T16:49:32.000000Z",
+      "durationMs": 17846,
+      "status": "Passed",
       "dominantCategory": "GitHub"
     },
     {
       "id": "P2",
       "name": "Implementation",
-      "startUtc": null,
-      "endUtc": null,
-      "durationMs": null,
-      "status": "Pending",
+      "startUtc": "2026-08-17T16:49:32.000000Z",
+      "endUtc": "2026-08-17T17:11:37.308705Z",
+      "durationMs": 1325308,
+      "status": "Passed",
       "dominantCategory": "Implementation"
     },
     {
       "id": "P3",
       "name": "Local verification",
-      "startUtc": null,
-      "endUtc": null,
-      "durationMs": null,
-      "status": "Pending",
+      "startUtc": "2026-08-17T17:07:11.000000Z",
+      "endUtc": "2026-08-17T17:13:57.121486Z",
+      "durationMs": 406121,
+      "status": "Passed",
       "dominantCategory": "Test"
     },
     {
@@ -230,9 +258,104 @@
       "event": "Closed P0 preflight and started P1 repository bootstrap",
       "result": "Started",
       "related": null
+    },
+    {
+      "id": "EVT-010",
+      "atUtc": "2026-08-17T16:49:32.000000Z",
+      "atLocal": "2026-08-17T18:49:32.000000+02:00",
+      "elapsedMs": 389988,
+      "phase": "P1",
+      "category": "GitHub",
+      "event": "Governance commit pushed; forward is default; grok/gallery-v1 created from that head",
+      "result": "Passed",
+      "related": "sha=6a006adfc1763e2cf8cdca9715d85faafd446bd1"
+    },
+    {
+      "id": "EVT-011",
+      "atUtc": "2026-08-17T17:07:11.000000Z",
+      "atLocal": "2026-08-17T19:07:11.000000+02:00",
+      "elapsedMs": 1448988,
+      "phase": "P2",
+      "category": "Test",
+      "event": "Six-app current-protocol and legacy contract plus gateway isolation tests green",
+      "result": "Passed",
+      "related": "33 vitest tests"
+    },
+    {
+      "id": "EVT-012",
+      "atUtc": "2026-08-17T17:08:00.000000Z",
+      "atLocal": "2026-08-17T19:08:00.000000+02:00",
+      "elapsedMs": 1497988,
+      "phase": "P2",
+      "category": "Implementation",
+      "event": "Built six deterministic single-file MCP App HTML resources",
+      "result": "Passed",
+      "related": "Vite 6.4.3 + vite-plugin-singlefile"
+    },
+    {
+      "id": "EVT-013",
+      "atUtc": "2026-08-17T17:11:33.000000Z",
+      "atLocal": "2026-08-17T19:11:33.000000+02:00",
+      "elapsedMs": 1710988,
+      "phase": "P3",
+      "category": "Test",
+      "event": "Playwright gallery, 320px, keyboard copy, and get-time UI-to-tool proof",
+      "result": "Passed",
+      "related": "2 browser tests"
+    },
+    {
+      "id": "EVT-014",
+      "atUtc": "2026-08-17T17:13:57.121486Z",
+      "atLocal": "2026-08-17T19:13:57.121486+02:00",
+      "elapsedMs": 1855109,
+      "phase": "P3",
+      "category": "Test",
+      "event": "Local pnpm release:check green",
+      "result": "Passed",
+      "related": "format lint typecheck build unit gateway contract browser notices architecture"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "id": "ISS-001",
+      "firstObservedUtc": "2026-08-17T17:08:00.000000Z",
+      "firstObservedElapsedMs": 1497988,
+      "resolvedUtc": "2026-08-17T17:09:01.000000Z",
+      "resolvedElapsedMs": 1558988,
+      "phase": "P2",
+      "classification": "implementation",
+      "origin": "exposed-by-run",
+      "expected": "App HTML resources at or below the plan's initial 512 KiB ceiling",
+      "observed": "Official single-file React MCP Apps were 528-739 KiB after production minify",
+      "status": "Accepted deviation"
+    },
+    {
+      "id": "ISS-002",
+      "firstObservedUtc": "2026-08-17T17:01:46.000000Z",
+      "firstObservedElapsedMs": 1123988,
+      "resolvedUtc": "2026-08-17T17:07:11.000000Z",
+      "resolvedElapsedMs": 1448988,
+      "phase": "P2",
+      "classification": "test",
+      "origin": "self-introduced",
+      "expected": "2026-07-28 tools/list and tools/call succeed",
+      "observed": "400 because Mcp-Method was absent",
+      "status": "Corrected"
+    },
+    {
+      "id": "ISS-003",
+      "firstObservedUtc": "2026-08-17T17:09:30.000000Z",
+      "firstObservedElapsedMs": 1587988,
+      "resolvedUtc": "2026-08-17T17:09:45.000000Z",
+      "resolvedElapsedMs": 1602988,
+      "phase": "P3",
+      "classification": "test",
+      "origin": "self-introduced",
+      "expected": "Notice verifier hashes copied upstream files",
+      "observed": "digest mismatch for grid-cell.png",
+      "status": "Corrected"
+    }
+  ],
   "regressions": [],
   "deployments": []
 }
