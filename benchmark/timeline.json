@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "1.0.0",
+  "modelName": "GROK",
+  "modelNamespace": "grok",
+  "startedAtUtc": "2026-08-17T16:43:02.012295Z",
+  "startedAtLocal": "2026-08-17T18:43:02.012295+02:00",
+  "startEpochMs": 1786984982012,
+  "completedAtUtc": null,
+  "completedAtLocal": null,
+  "completedEpochMs": null,
+  "totalElapsedMs": null,
+  "estimatedActiveMs": null,
+  "externalWaitMs": 0,
+  "ciWaitMs": 0,
+  "vercelWaitMs": 0,
+  "reworkMs": 0,
+  "currentPhase": "Bootstrap",
+  "finalVerdict": null,
+  "milestones": [
+    {
+      "id": "clock-started",
+      "label": "Clock started",
+      "atUtc": "2026-08-17T16:43:02.012295Z",
+      "atLocal": "2026-08-17T18:43:02.012295+02:00",
+      "elapsedMs": 0
+    },
+    {
+      "id": "timeline-created",
+      "label": "Timeline files created",
+      "atUtc": "2026-08-17T16:43:02.012295Z",
+      "atLocal": "2026-08-17T18:43:02.012295+02:00",
+      "elapsedMs": 0
+    },
+    {
+      "id": "preflight-complete",
+      "label": "Preflight complete",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141
+    }
+  ],
+  "phases": [
+    {
+      "id": "P0",
+      "name": "Preflight",
+      "startUtc": "2026-08-17T16:43:02.012295Z",
+      "endUtc": "2026-08-17T16:49:14.153613Z",
+      "durationMs": 372141,
+      "status": "Passed",
+      "dominantCategory": "Implementation"
+    },
+    {
+      "id": "P1",
+      "name": "Bootstrap",
+      "startUtc": "2026-08-17T16:49:14.153613Z",
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Running",
+      "dominantCategory": "GitHub"
+    },
+    {
+      "id": "P2",
+      "name": "Implementation",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "Implementation"
+    },
+    {
+      "id": "P3",
+      "name": "Local verification",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "Test"
+    },
+    {
+      "id": "P4",
+      "name": "Pull request and CI",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "CI"
+    },
+    {
+      "id": "P5",
+      "name": "Preview",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "Vercel"
+    },
+    {
+      "id": "P6",
+      "name": "Merge",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "GitHub"
+    },
+    {
+      "id": "P7",
+      "name": "Staged production",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "Vercel"
+    },
+    {
+      "id": "P8",
+      "name": "Promotion and stable origin",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "Vercel"
+    },
+    {
+      "id": "P9",
+      "name": "Reports and terminal gate",
+      "startUtc": null,
+      "endUtc": null,
+      "durationMs": null,
+      "status": "Pending",
+      "dominantCategory": "Implementation"
+    }
+  ],
+  "events": [
+    {
+      "id": "EVT-001",
+      "atUtc": "2026-08-17T16:43:02.012295Z",
+      "atLocal": "2026-08-17T18:43:02.012295+02:00",
+      "elapsedMs": 0,
+      "phase": "P0",
+      "category": "Implementation",
+      "event": "Recorded actual start time and created TIMELINE.md plus benchmark/timeline.json in the empty namespaced directory",
+      "result": "Started",
+      "related": "MODEL_NAME=GROK MODEL_NAMESPACE=grok"
+    },
+    {
+      "id": "EVT-002",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "GitHub",
+      "event": "Verified gh authentication as reachjalil with repo, workflow, and org read scopes",
+      "result": "Passed",
+      "related": "login=reachjalil"
+    },
+    {
+      "id": "EVT-003",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "GitHub",
+      "event": "Verified different-ai membership and repository creation permission",
+      "result": "Passed",
+      "related": "role=member members_can_create_private_repositories=true"
+    },
+    {
+      "id": "EVT-004",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "GitHub",
+      "event": "Confirmed namespaced GitHub repository does not exist",
+      "result": "Passed",
+      "related": "different-ai/openwork-mcp-app-gallery-grok"
+    },
+    {
+      "id": "EVT-005",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "Vercel",
+      "event": "Confirmed namespaced Vercel project is absent under authenticated teams",
+      "result": "Passed",
+      "related": "openwork-mcp-app-gallery-grok"
+    },
+    {
+      "id": "EVT-006",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "GitHub",
+      "event": "Fetched authoritative different-ai/openwork-snacks:forward",
+      "result": "Passed",
+      "related": "sha=aef537a6118f1533d49810b7a245ff0c740054c2"
+    },
+    {
+      "id": "EVT-007",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "Implementation",
+      "event": "Pinned-source license preflight for ext-apps at 10195ad91851502134930e9b80ec2c04e277a720",
+      "result": "Passed",
+      "related": "examples declare MIT; root LICENSE mixed Apache-2.0/MIT; gallery-owned Apache-2.0"
+    },
+    {
+      "id": "EVT-008",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "Dependency",
+      "event": "Confirmed current mcp-handler 2.1.1 and @modelcontextprotocol/server 2.0.0",
+      "result": "Passed",
+      "related": "mcp-handler@2.1.1 inspected commit 7c8fe0a6d18e2fd112739360ff587cfcd31a1472"
+    },
+    {
+      "id": "EVT-009",
+      "atUtc": "2026-08-17T16:49:14.153613Z",
+      "atLocal": "2026-08-17T18:49:14.153613+02:00",
+      "elapsedMs": 372141,
+      "phase": "P0",
+      "category": "Implementation",
+      "event": "Closed P0 preflight and started P1 repository bootstrap",
+      "result": "Started",
+      "related": null
+    }
+  ],
+  "issues": [],
+  "regressions": [],
+  "deployments": []
+}
